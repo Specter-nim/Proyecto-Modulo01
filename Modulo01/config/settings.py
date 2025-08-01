@@ -45,6 +45,9 @@ INSTALLED_APPS = [
     
     # Local apps
     'authentication',
+    'permissions',
+    'roles',
+    'services',
 ]
 
 MIDDLEWARE = [
