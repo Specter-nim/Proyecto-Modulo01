@@ -20,7 +20,7 @@ class LoginSerializer(serializers.Serializer):
         if user is None:
             raise AuthenticationFailed(_('Credenciales inválidas.'))
         
-        if user.is_activate is None:
+        if user.is_active is None:
             raise AuthenticationFailed(_('Cuenta no activada.'))
         
         refresh = RefreshToken.for_user(user)
