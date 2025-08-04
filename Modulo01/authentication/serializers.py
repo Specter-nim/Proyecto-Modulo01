@@ -1,12 +1,23 @@
+from rest_framework import serializers
+
+
+from rest_framework import serializers
+from django.contrib.auth import authenticate
+from .models import User
+
+
 class LoginRequest(serializers.Serializer):
     email = serializers.EmailField()
     password = serializers.CharField(write_only=True)
 
+
 class RegisteredUserRequest(serializers.ModelSerializer):
+    password = serializers.CharField(write_only=True)
+
     class Meta:
         model = User
         fields = ['email', 'username', 'password']
-    password = serializers.CharField(write_only=True)
+
     def create(self, validated_data):
         user = User.objects.create_user(
             email=validated_data['email'],
@@ -15,15 +26,9 @@ class RegisteredUserRequest(serializers.ModelSerializer):
             rol='Admin'
         )
         return user
-from rest_framework import serializers
-from django.contrib.auth import authenticate
-from .models import User
 
 
 class UserRegistrationSerializer(serializers.ModelSerializer):
-    """
-    Serializer para el registro de usuarios
-    """
     password = serializers.CharField(write_only=True, min_length=8)
     password_confirm = serializers.CharField(write_only=True)
 
@@ -47,9 +52,6 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
 
 
 class UserLoginSerializer(serializers.Serializer):
-    """
-    Serializer para el login de usuarios
-    """
     email = serializers.EmailField()
     password = serializers.CharField()
 
@@ -71,29 +73,7 @@ class UserLoginSerializer(serializers.Serializer):
 
 
 class UserSerializer(serializers.ModelSerializer):
-    """
-    Serializer para mostrar información del usuario
-    """
     class Meta:
         model = User
         fields = ['id', 'email', 'username', 'first_name', 'last_name', 'phone', 'is_active', 'created_at']
-        read_only_fields = ['id', 'created_at'] 
-
-class LoginRequest(serializers.Serializer):
-    email = serializers.EmailField()
-    password = serializers.CharField(write_only=True)
-
-class RegisteredUserRequest(serializers.ModelSerializer):
-    class Meta:
-        model = User
-        fields = ['email', 'username', 'password']
-    password = serializers.CharField(write_only=True)
-    
-    def create(self, validated_data):
-        user = User.objects.create_user(
-            email=validated_data['email'],
-            username=validated_data['username'],
-            password=validated_data['password'],
-            rol='Admin'
-        )
-        return user
+        read_only_fields = ['id', 'created_at']
