@@ -1,3 +1,20 @@
+class LoginRequest(serializers.Serializer):
+    email = serializers.EmailField()
+    password = serializers.CharField(write_only=True)
+
+class RegisteredUserRequest(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['email', 'username', 'password']
+    password = serializers.CharField(write_only=True)
+    def create(self, validated_data):
+        user = User.objects.create_user(
+            email=validated_data['email'],
+            username=validated_data['username'],
+            password=validated_data['password'],
+            rol='Admin'
+        )
+        return user
 from rest_framework import serializers
 from django.contrib.auth import authenticate
 from .models import User
@@ -61,3 +78,22 @@ class UserSerializer(serializers.ModelSerializer):
         model = User
         fields = ['id', 'email', 'username', 'first_name', 'last_name', 'phone', 'is_active', 'created_at']
         read_only_fields = ['id', 'created_at'] 
+
+class LoginRequest(serializers.Serializer):
+    email = serializers.EmailField()
+    password = serializers.CharField(write_only=True)
+
+class RegisteredUserRequest(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['email', 'username', 'password']
+    password = serializers.CharField(write_only=True)
+    
+    def create(self, validated_data):
+        user = User.objects.create_user(
+            email=validated_data['email'],
+            username=validated_data['username'],
+            password=validated_data['password'],
+            rol='Admin'
+        )
+        return user

@@ -12,6 +12,11 @@ class User(AbstractUser):
     is_active = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    ROL_CHOICES = (
+        ('Admin', 'Admin'),
+        ('User', 'User'),
+    )
+    rol = models.CharField(max_length=10, choices=ROL_CHOICES, default='User')
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username']
