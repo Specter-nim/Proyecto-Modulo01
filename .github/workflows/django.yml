@@ -20,33 +20,33 @@ jobs:
         python-version: 3.11
 
     - name: Install dependencies
-      run: pip install -r "Modulo 01/requirements.txt"
+      run: pip install -r "Modulo01/requirements.txt"
 
     - name: Configure Django test settings
       run: |
-        mkdir -p "Modulo 01/config/settings"
-        echo "from .base import *" > "Modulo 01/config/settings/test.py"
-        echo "DEBUG = True" >> "Modulo 01/config/settings/test.py"
-        echo "DATABASES = {" >> "Modulo 01/config/settings/test.py"
-        echo "    'default': {" >> "Modulo 01/config/settings/test.py"
-        echo "        'ENGINE': 'django.db.backends.sqlite3'," >> "Modulo 01/config/settings/test.py"
-        echo "        'NAME': BASE_DIR / 'test_db.sqlite3'," >> "Modulo 01/config/settings/test.py"
-        echo "    }" >> "Modulo 01/config/settings/test.py"
-        echo "}" >> "Modulo 01/config/settings/test.py"
+        mkdir -p "Modulo01/config/settings"
+        echo "from .base import *" > "Modulo01/config/settings/test.py"
+        echo "DEBUG = True" >> "Modulo01/config/settings/test.py"
+        echo "DATABASES = {" >> "Modulo01/config/settings/test.py"
+        echo "    'default': {" >> "Modulo01/config/settings/test.py"
+        echo "        'ENGINE': 'django.db.backends.sqlite3'," >> "Modulo01/config/settings/test.py"
+        echo "        'NAME': BASE_DIR / 'test_db.sqlite3'," >> "Modulo01/config/settings/test.py"
+        echo "    }" >> "Modulo01/config/settings/test.py"
+        echo "}" >> "Modulo01/config/settings/test.py"
 
     - name: Run migrations
       run: python manage.py migrate --settings=config.settings.test
-      working-directory: "Modulo 01"
+      working-directory: "Modulo01"
 
     - name: Run tests
       run: python manage.py test --settings=config.settings.test
-      working-directory: "Modulo 01"
+      working-directory: "Modulo01"
 
     - name: Run coverage report
       run: |
         pip install coverage
         coverage run --source='.' manage.py test --settings=config.settings.test
         coverage report
-      working-directory: "Modulo 01"
+      working-directory: "Modulo01"
 
 
