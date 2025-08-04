@@ -20,33 +20,37 @@ jobs:
         python-version: 3.11
 
     - name: Install dependencies
-      run: pip install -r "Modulo01/requirements.txt"
+      run: pip install -r requirements.txt
+      working-directory: "modulo01"
 
     - name: Configure Django test settings
       run: |
-        mkdir -p "Modulo01/config/settings"
-        echo "from .base import *" > "Modulo01/config/settings/test.py"
-        echo "DEBUG = True" >> "Modulo01/config/settings/test.py"
-        echo "DATABASES = {" >> "Modulo01/config/settings/test.py"
-        echo "    'default': {" >> "Modulo01/config/settings/test.py"
-        echo "        'ENGINE': 'django.db.backends.sqlite3'," >> "Modulo01/config/settings/test.py"
-        echo "        'NAME': BASE_DIR / 'test_db.sqlite3'," >> "Modulo01/config/settings/test.py"
-        echo "    }" >> "Modulo01/config/settings/test.py"
-        echo "}" >> "Modulo01/config/settings/test.py"
+        mkdir -p config/settings
+        touch config/__init__.py
+        touch config/settings/__init__.py
+        echo "from .base import *" > config/settings/test.py
+        echo "DEBUG = True" >> config/settings/test.py
+        echo "DATABASES = {" >> config/settings/test.py
+        echo "    'default': {" >> config/settings/test.py
+        echo "        'ENGINE': 'django.db.backends.sqlite3'," >> config/settings/test.py
+        echo "        'NAME': BASE_DIR / 'test_db.sqlite3'," >> config/settings/test.py
+        echo "    }" >> config/settings/test.py
+        echo "}" >> config/settings/test.py
+      working-directory: "modulo01"
 
     - name: Run migrations
       run: python manage.py migrate --settings=config.settings.test
-      working-directory: "Modulo01"
+      working-directory: "modulo01"
 
     - name: Run tests
       run: python manage.py test --settings=config.settings.test
-      working-directory: "Modulo01"
+      working-directory: "modulo01"
 
     - name: Run coverage report
       run: |
         pip install coverage
         coverage run --source='.' manage.py test --settings=config.settings.test
         coverage report
-      working-directory: "Modulo01"
+      working-directory: "modulo01"
 
 
