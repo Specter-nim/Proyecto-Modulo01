@@ -27,55 +27,52 @@ jobs:
     - name: Create test settings for API
       run: |
         mkdir -p config/settings
-        echo "__init__ = ''" > config/__init__.py
-        echo "__init__ = ''" > config/settings/__init__.py
+        echo "" > config/__init__.py
+        echo "" > config/settings/__init__.py
 
-        cat <<EOF > config/settings/test.py
-from pathlib import Path
-BASE_DIR = Path(__file__).resolve().parent.parent.parent
-
-SECRET_KEY = 'test-secret-key'
-DEBUG = True
-ALLOWED_HOSTS = []
-
-INSTALLED_APPS = [
-    'django.contrib.contenttypes',
-    'django.contrib.auth',
-    'rest_framework',
-    'rest_framework_simplejwt',
-    'guardian',
-    'authentication',
-    'roles',
-    'permissions',
-]
-
-MIDDLEWARE = []
-
-ROOT_URLCONF = 'config.urls'
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'test_db.sqlite3',
-    }
-}
-
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-REST_FRAMEWORK = {
-    'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.IsAuthenticated',
-    ],
-    'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework_simplejwt.authentication.JWTAuthentication',
-    ]
-}
-
-AUTHENTICATION_BACKENDS = [
-    'django.contrib.auth.backends.ModelBackend',
-    'guardian.backends.ObjectPermissionBackend',
-]
-EOF
+        echo "from pathlib import Path" > config/settings/test.py
+        echo "BASE_DIR = Path(__file__).resolve().parent.parent.parent" >> config/settings/test.py
+        echo "" >> config/settings/test.py
+        echo "SECRET_KEY = 'test-secret-key'" >> config/settings/test.py
+        echo "DEBUG = True" >> config/settings/test.py
+        echo "ALLOWED_HOSTS = []" >> config/settings/test.py
+        echo "" >> config/settings/test.py
+        echo "INSTALLED_APPS = [" >> config/settings/test.py
+        echo "    'django.contrib.contenttypes'," >> config/settings/test.py
+        echo "    'django.contrib.auth'," >> config/settings/test.py
+        echo "    'rest_framework'," >> config/settings/test.py
+        echo "    'rest_framework_simplejwt'," >> config/settings/test.py
+        echo "    'guardian'," >> config/settings/test.py
+        echo "    'authentication'," >> config/settings/test.py
+        echo "    'roles'," >> config/settings/test.py
+        echo "    'permissions'," >> config/settings/test.py
+        echo "]" >> config/settings/test.py
+        echo "" >> config/settings/test.py
+        echo "MIDDLEWARE = []" >> config/settings/test.py
+        echo "ROOT_URLCONF = 'config.urls'" >> config/settings/test.py
+        echo "" >> config/settings/test.py
+        echo "DATABASES = {" >> config/settings/test.py
+        echo "    'default': {" >> config/settings/test.py
+        echo "        'ENGINE': 'django.db.backends.sqlite3'," >> config/settings/test.py
+        echo "        'NAME': BASE_DIR / 'test_db.sqlite3'," >> config/settings/test.py
+        echo "    }" >> config/settings/test.py
+        echo "}" >> config/settings/test.py
+        echo "" >> config/settings/test.py
+        echo "DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'" >> config/settings/test.py
+        echo "" >> config/settings/test.py
+        echo "REST_FRAMEWORK = {" >> config/settings/test.py
+        echo "    'DEFAULT_PERMISSION_CLASSES': [" >> config/settings/test.py
+        echo "        'rest_framework.permissions.IsAuthenticated'," >> config/settings/test.py
+        echo "    ]," >> config/settings/test.py
+        echo "    'DEFAULT_AUTHENTICATION_CLASSES': [" >> config/settings/test.py
+        echo "        'rest_framework_simplejwt.authentication.JWTAuthentication'," >> config/settings/test.py
+        echo "    ]" >> config/settings/test.py
+        echo "}" >> config/settings/test.py
+        echo "" >> config/settings/test.py
+        echo "AUTHENTICATION_BACKENDS = [" >> config/settings/test.py
+        echo "    'django.contrib.auth.backends.ModelBackend'," >> config/settings/test.py
+        echo "    'guardian.backends.ObjectPermissionBackend'," >> config/settings/test.py
+        echo "]" >> config/settings/test.py
 
     - name: Run migrations
       run: python manage.py migrate --settings=config.settings.test
@@ -84,9 +81,4 @@ EOF
       run: |
         coverage run manage.py test --settings=config.settings.test
         coverage report
-
-        coverage run --source='.' manage.py test --settings=config.settings.test
-        coverage report
-      
-
 
