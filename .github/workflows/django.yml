@@ -41,6 +41,9 @@ jobs:
         echo "    'django.contrib.admin'," >> config/settings/test.py
         echo "    'django.contrib.auth'," >> config/settings/test.py
         echo "    'django.contrib.contenttypes'," >> config/settings/test.py
+        echo "    'django.contrib.sessions'," >> config/settings/test.py
+        echo "    'django.contrib.messages'," >> config/settings/test.py
+        echo "    'django.contrib.staticfiles'," >> config/settings/test.py
         echo "    'rest_framework'," >> config/settings/test.py
         echo "    'rest_framework_simplejwt'," >> config/settings/test.py
         echo "    'guardian'," >> config/settings/test.py
@@ -49,7 +52,16 @@ jobs:
         echo "    'permissions'," >> config/settings/test.py
         echo "]" >> config/settings/test.py
         echo "" >> config/settings/test.py
-        echo "MIDDLEWARE = []" >> config/settings/test.py
+        echo "MIDDLEWARE = [" >> config/settings/test.py
+        echo "    'django.middleware.security.SecurityMiddleware'," >> config/settings/test.py
+        echo "    'django.contrib.sessions.middleware.SessionMiddleware'," >> config/settings/test.py
+        echo "    'django.middleware.common.CommonMiddleware'," >> config/settings/test.py
+        echo "    'django.middleware.csrf.CsrfViewMiddleware'," >> config/settings/test.py
+        echo "    'django.contrib.auth.middleware.AuthenticationMiddleware'," >> config/settings/test.py
+        echo "    'django.contrib.messages.middleware.MessageMiddleware'," >> config/settings/test.py
+        echo "    'django.middleware.clickjacking.XFrameOptionsMiddleware'," >> config/settings/test.py
+        echo "]" >> config/settings/test.py
+        echo "" >> config/settings/test.py
         echo "ROOT_URLCONF = 'config.urls'" >> config/settings/test.py
         echo "" >> config/settings/test.py
         echo "DATABASES = {" >> config/settings/test.py
@@ -74,6 +86,7 @@ jobs:
         echo "    'django.contrib.auth.backends.ModelBackend'," >> config/settings/test.py
         echo "    'guardian.backends.ObjectPermissionBackend'," >> config/settings/test.py
         echo "]" >> config/settings/test.py
+
 
     - name: Run migrations
       run: python manage.py migrate --settings=config.settings.test
