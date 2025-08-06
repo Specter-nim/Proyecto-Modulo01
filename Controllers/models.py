@@ -17,3 +17,6 @@ class UserVerificationToken(models.Model):
 
     def __str__(self):
         return f"{self.user.email} - {self.code}"
+    
+    class Meta:
+        app_label = 'Controllers' 
