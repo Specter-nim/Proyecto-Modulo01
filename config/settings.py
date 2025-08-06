@@ -48,7 +48,7 @@ INSTALLED_APPS = [
     'Auth',
     'permissions',
     'roles',
-    'services',
+    'services.apps.ServicesConfig',
     'Controllers.apps.ControllersConfig',
 ]
 
