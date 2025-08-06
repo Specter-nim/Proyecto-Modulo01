@@ -21,7 +21,6 @@ jobs:
 
     - name: Install dependencies
       run: pip install -r requirements.txt
-      working-directory: "Modulo01"
 
     - name: Configure Django test settings
       run: |
@@ -36,21 +35,15 @@ jobs:
         echo "        'NAME': BASE_DIR / 'test_db.sqlite3'," >> config/settings/test.py
         echo "    }" >> config/settings/test.py
         echo "}" >> config/settings/test.py
-      working-directory: "Modulo01"
 
     - name: Run migrations
       run: python manage.py migrate --settings=config.settings.test
-      working-directory: "Modulo01"
 
     - name: Run tests
       run: python manage.py test --settings=config.settings.test
-      working-directory: "Modulo01"
 
     - name: Run coverage report
       run: |
         pip install coverage
         coverage run --source='.' manage.py test --settings=config.settings.test
         coverage report
-      working-directory: "Modulo01"
-
-
