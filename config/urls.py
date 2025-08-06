@@ -25,7 +25,6 @@ urlpatterns = [
 
     # Divide bien las rutas por app
     path('api/auth/', include('authentication.urls')),
-    path('api/auth-legacy/', include('Auth.urls')),
     path('api/controllers/', include('Controllers.urls')),
     path('api/permissions/', include('permissions.urls')),
     path('api/roles/', include('roles.urls')),
