@@ -1,4 +1,4 @@
-name: Django CI
+name: Django API CI
 
 on:
   push:
@@ -20,33 +20,71 @@ jobs:
         python-version: 3.11
 
     - name: Install dependencies
-      run: pip install -r requirements.txt
+      run: |
+        pip install -r requirements.txt
+        pip install coverage
 
-    - name: Configure Django test settings
+    - name: Create test settings for API
       run: |
         mkdir -p config/settings
-        touch config/__init__.py
-        touch config/settings/__init__.py
-        echo "from .base import *" > config/settings/test.py
-        echo "DEBUG = True" >> config/settings/test.py
-        echo "DATABASES = {" >> config/settings/test.py
-        echo "    'default': {" >> config/settings/test.py
-        echo "        'ENGINE': 'django.db.backends.sqlite3'," >> config/settings/test.py
-        echo "        'NAME': BASE_DIR / 'test_db.sqlite3'," >> config/settings/test.py
-        echo "    }" >> config/settings/test.py
-        echo "}" >> config/settings/test.py
+        echo "__init__ = ''" > config/__init__.py
+        echo "__init__ = ''" > config/settings/__init__.py
+
+        cat <<EOF > config/settings/test.py
+from pathlib import Path
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
+
+SECRET_KEY = 'test-secret-key'
+DEBUG = True
+ALLOWED_HOSTS = []
+
+INSTALLED_APPS = [
+    'django.contrib.contenttypes',
+    'django.contrib.auth',
+    'rest_framework',
+    'rest_framework_simplejwt',
+    'guardian',
+    'authentication',
+    'roles',
+    'permissions',
+]
+
+MIDDLEWARE = []
+
+ROOT_URLCONF = 'config.urls'
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'test_db.sqlite3',
+    }
+}
+
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+    ],
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ]
+}
+
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'guardian.backends.ObjectPermissionBackend',
+]
+EOF
 
     - name: Run migrations
       run: python manage.py migrate --settings=config.settings.test
 
-    - name: Run tests
-      run: python manage.py test --settings=config.settings.test
-
-    - name: Run coverage report
+    - name: Run API tests with coverage
       run: |
-        pip install coverage
-        coverage run --source='.' manage.py test --settings=config.settings.test
+        coverage run manage.py test --settings=config.settings.test
         coverage report
+
         coverage run --source='.' manage.py test --settings=config.settings.test
         coverage report
       
