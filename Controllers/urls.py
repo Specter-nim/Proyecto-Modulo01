@@ -7,8 +7,6 @@ from Controllers.Auth.change_password import ChangePasswordView, ValidatePasswor
 from Controllers.Auth.verification import VerifyCodeView
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-
     # Autenticación API
     path('api/auth/login/', LoginView.as_view(), name='login'),
     path('api/auth/logout/', LogoutView.as_view(), name='logout'),
