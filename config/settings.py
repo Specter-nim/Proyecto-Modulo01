@@ -49,7 +49,7 @@ INSTALLED_APPS = [
     'permissions',
     'roles',
     'services',
-    'Controllers',
+    'Controllers.apps.ControllersConfig',
 ]
 
 MIDDLEWARE = [
