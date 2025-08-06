@@ -45,7 +45,6 @@ INSTALLED_APPS = [
     
     # Local apps
     'authentication',
-    'Auth',
     'permissions',
     'roles',
     'services.apps.ServicesConfig',
