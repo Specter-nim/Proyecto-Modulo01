@@ -38,8 +38,9 @@ jobs:
         echo "ALLOWED_HOSTS = []" >> config/settings/test.py
         echo "" >> config/settings/test.py
         echo "INSTALLED_APPS = [" >> config/settings/test.py
-        echo "    'django.contrib.contenttypes'," >> config/settings/test.py
+        echo "    'django.contrib.admin'," >> config/settings/test.py
         echo "    'django.contrib.auth'," >> config/settings/test.py
+        echo "    'django.contrib.contenttypes'," >> config/settings/test.py
         echo "    'rest_framework'," >> config/settings/test.py
         echo "    'rest_framework_simplejwt'," >> config/settings/test.py
         echo "    'guardian'," >> config/settings/test.py
