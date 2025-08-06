@@ -72,8 +72,17 @@ class UserLoginSerializer(serializers.Serializer):
         return attrs
 
 
-class UserSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = User
-        fields = ['id', 'email', 'username', 'first_name', 'last_name', 'phone', 'is_active', 'created_at']
-        read_only_fields = ['id', 'created_at']
+
+class VerificationRequestSerializer(serializers.Serializer):
+    email = serializers.EmailField()
+    code = serializers.CharField(max_length=6)
+
+class ChangePasswordRequest(serializers.Serializer):
+    old_password = serializers.CharField(write_only=True)
+    new_password = serializers.CharField(write_only=True, min_length=8)
+
+class ValidatePasswordRequest(serializers.Serializer):
+    password = serializers.CharField(write_only=True)
+
+class ResetPasswordRequest(serializers.Serializer):
+    email = serializers.EmailField()
