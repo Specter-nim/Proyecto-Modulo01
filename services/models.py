@@ -14,6 +14,7 @@ class UserRole(models.Model):
         verbose_name = "Rol de Usuario"
         verbose_name_plural = "Roles de Usuario"
         unique_together = ['user', 'role']
+        app_label = 'services'
     
     def __str__(self):
         return f"{self.user.username} - {self.role.name}"
@@ -27,6 +28,8 @@ class RolePermission(models.Model):
         verbose_name = "Permiso de Rol"
         verbose_name_plural = "Permisos de Rol"
         unique_together = ['role', 'permission']
+        app_label = 'services'
     
     def __str__(self):
         return f"{self.role.name} - {self.permission.name}"
+    
