@@ -90,7 +90,7 @@ jobs:
 
 
     - name: Run migrations
-      run: python manage.py migrate --settings=config.settings.test
+      run: python manage.py migrate --settings=config.settings
 
     - name: Run API tests with coverage
       run: |
