@@ -1,6 +1,7 @@
 from rest_framework.response import Response
 from rest_framework import status
-from Controllers.models import UserVerificationToken  # ACA PAVO
+from ..models import UserVerificationToken  # Corregido: uso ruta relativa
+
 def verify_code(user, code):
     try:
         token_obj = UserVerificationToken.objects.get(user=user, code=code)
