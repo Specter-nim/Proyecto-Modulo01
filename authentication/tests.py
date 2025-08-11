@@ -19,6 +19,10 @@ class TestRegisterView(APITestCase):
         }
         response = self.client.post(url, data, format='json')
         print(response.status_code, response.data)  # Ayuda para debug
+
+        # Verificamos el código HTTP
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
-        self.assertEqual(response.data['email'], data['email'])
-        self.assertEqual(response.data['username'], data['username'])
+
+        # Verificamos que los datos del usuario sean correctos
+        self.assertEqual(response.data['user']['email'], data['email'])
+        self.assertEqual(response.data['user']['username'], data['username'])
