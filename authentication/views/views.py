@@ -62,7 +62,7 @@ def password_reset_request(request):
         
         # Enviar email de restablecimiento
         try:
-            from .utils import send_password_reset_email
+            from ..utils import send_password_reset_email
             send_password_reset_email(user, request)
             return Response({
                 'message': 'Se ha enviado un email con las instrucciones para restablecer tu contraseña.'
