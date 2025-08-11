@@ -1,8 +1,8 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from .serializers_email import SendVerifyCodeSerializer
-from .services_email import EmailService
+from ..serializers_email import SendVerifyCodeSerializer
+from ..services_email import EmailService
 from django.contrib.auth import get_user_model
 
 User = get_user_model()
