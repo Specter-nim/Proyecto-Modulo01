@@ -37,15 +37,26 @@ class LogoutView(APIView):
 # RegisterView
 class RegisterView(APIView):
     permission_classes = [AllowAny]
+
     def post(self, request):
         serializer = RegisteredUserRequest(data=request.data)
         serializer.is_valid(raise_exception=True)
         user = serializer.save()
-        login(request, user)
-        return Response({
-            'message': 'Usuario registrado exitosamente',
-            'user': UserSerializer(user).data
-        }, status=status.HTTP_201_CREATED)
+
+        # Autenticar para que Django sepa el backend
+        user = authenticate(request, username=user.email, password=request.data['password'])
+
+        if user:
+            login(request, user)
+            return Response({
+                'message': 'Usuario registrado exitosamente',
+                'user': UserSerializer(user).data
+            }, status=status.HTTP_201_CREATED)
+        else:
+            return Response({
+                'error': 'No se pudo autenticar al usuario recién registrado.'
+            }, status=status.HTTP_400_BAD_REQUEST)
+
 def password_reset_request(request):
     """
     Vista para solicitar restablecimiento de contraseña
