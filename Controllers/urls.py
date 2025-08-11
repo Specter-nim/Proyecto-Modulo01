@@ -1,10 +1,10 @@
 from django.contrib import admin
 from django.urls import path, include
-from .Auth.authenticated import LoginView, LogoutView
-from .Auth.register_user import RegisterView
-from .Auth.reset_password import VerifyEmailView
-from .Auth.change_password import ChangePasswordView, ValidatePasswordView
-from .Auth.verification import VerifyCodeView
+from Controllers.Auth.authenticated import LoginView, LogoutView
+from Controllers.Auth.register_user import RegisterView
+from Controllers.Auth.reset_password import VerifyEmailView
+from Controllers.Auth.change_password import ChangePasswordView, ValidatePasswordView
+from Controllers.Auth.verification import VerifyCodeView
 
 urlpatterns = [
     path('admin/', admin.site.urls),

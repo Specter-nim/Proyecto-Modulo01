@@ -3,7 +3,7 @@ from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from rest_framework import status
 
-from ..services.get_role_service import get_user_role_and_permissions  # Corregido: uso ruta relativa
+from Controllers.services.get_role_service import get_user_role_and_permissions
 
 class GetRoleView(APIView):
     permission_classes = [IsAuthenticated]

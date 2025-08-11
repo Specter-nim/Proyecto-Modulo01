@@ -1,7 +1,7 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from ..services.reset_password_service import verify_email  # Corregido: uso ruta relativa
+from Controllers.services.reset_password_service import verify_email
 
 class VerifyEmailView(APIView):
     """
