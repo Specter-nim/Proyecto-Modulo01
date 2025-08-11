@@ -2,9 +2,9 @@ name: Django API CI
 
 on:
   push:
-    branches: [ main ]
+    branches: [ Actions ]
   pull_request:
-    branches: [ main ]
+    branches: [ Actions ]
   workflow_dispatch:
 
 jobs:
