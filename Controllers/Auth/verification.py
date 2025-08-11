@@ -1,7 +1,7 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from ..services.verification_service import verify_code  # Corregido: uso ruta relativa
+from Controllers.services.verification_service import verify_code
 from django.contrib.auth import get_user_model
 
 User = get_user_model()

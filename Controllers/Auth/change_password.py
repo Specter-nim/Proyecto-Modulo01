@@ -4,7 +4,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework import status
 from django.contrib.auth.hashers import check_password
 
-from ..services.change_password_service import change_user_password  # Corregido: uso ruta relativa
+from Controllers.services.change_password_service import change_user_password
 
 
 class ChangePasswordView(APIView):
