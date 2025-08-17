@@ -12,6 +12,7 @@ EMAIL_CONFIG = {
     'EMAIL_HOST_PASSWORD': 'tu-password-de-aplicacion',  # Cambiar por tu contraseña de aplicación
     
     # Para desarrollo (consola)
+    
     # 'EMAIL_BACKEND': 'django.core.mail.backends.console.EmailBackend',
     
     'DEFAULT_FROM_EMAIL': 'Django Entorno <tu-email@gmail.com>'

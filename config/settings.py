@@ -181,6 +181,7 @@ SIMPLE_JWT = {
     'JTI_CLAIM': 'jti',
 }
 
+
 # Email Configuration
 try:
     from .email_config import EMAIL_CONFIG

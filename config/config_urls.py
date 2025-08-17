@@ -9,4 +9,5 @@ app_name = 'config'
 urlpatterns = [
     # Aquí puedes agregar URLs adicionales si es necesario
     # Por ejemplo, para vistas de configuración del sistema
+    
 ] 

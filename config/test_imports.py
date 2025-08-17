@@ -11,6 +11,7 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'config.settings')
 django.setup()
 
 # Probar importaciones
+
 try:
     print("Probando importaciones de Controllers...")
     
