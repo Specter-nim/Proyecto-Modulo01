@@ -23,11 +23,6 @@ urlpatterns = [
     path('api/', api_root, name='api_root'),
     path('admin/', admin.site.urls),
 
-    # Divide bien las rutas por app
-    path('api/auth/', include('authentication.urls')),
-    path('api/auth-legacy/', include('Auth.urls')),
-    path('api/controllers/', include('Controllers.urls')),
-    path('api/permissions/', include('permissions.urls')),
-    path('api/roles/', include('roles.urls')),
-    path('api/services/', include('services.urls')),
+    # Rutas del módulo 01_architect
+    path('api/architect/', include('01_architect.urls')),
 ]
