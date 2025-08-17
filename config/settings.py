@@ -182,15 +182,21 @@ SIMPLE_JWT = {
 }
 
 # Email Configuration
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'  # Para Gmail
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'tu-email@gmail.com'  # Cambiar por tu email
-EMAIL_HOST_PASSWORD = 'tu-password-de-aplicacion'  # Cambiar por tu contraseña de aplicación
-
-# Configuración alternativa para desarrollo (consola)
-# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-
-# Configuración del remitente por defecto
-DEFAULT_FROM_EMAIL = 'Django Entorno <tu-email@gmail.com>'
+try:
+    from .email_config import EMAIL_CONFIG
+    EMAIL_BACKEND = EMAIL_CONFIG['EMAIL_BACKEND']
+    EMAIL_HOST = EMAIL_CONFIG['EMAIL_HOST']
+    EMAIL_PORT = EMAIL_CONFIG['EMAIL_PORT']
+    EMAIL_USE_TLS = EMAIL_CONFIG['EMAIL_USE_TLS']
+    EMAIL_HOST_USER = EMAIL_CONFIG['EMAIL_HOST_USER']
+    EMAIL_HOST_PASSWORD = EMAIL_CONFIG['EMAIL_HOST_PASSWORD']
+    DEFAULT_FROM_EMAIL = EMAIL_CONFIG['DEFAULT_FROM_EMAIL']
+except ImportError:
+    # Configuración por defecto si no se puede importar
+    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+    EMAIL_HOST = 'smtp.gmail.com'
+    EMAIL_PORT = 587
+    EMAIL_USE_TLS = True
+    EMAIL_HOST_USER = 'tu-email@gmail.com'
+    EMAIL_HOST_PASSWORD = 'tu-password-de-aplicacion'
+    DEFAULT_FROM_EMAIL = 'Django Entorno <tu-email@gmail.com>'
