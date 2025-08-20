@@ -13,45 +13,45 @@ django.setup()
 # Probar importaciones
 
 try:
-    print("Probando importaciones de Controllers...")
+    print("Probando importaciones de views...")
     
     # Importar vistas
-    from Controllers.Auth.authenticated import LoginView, LogoutView
+    from views.Auth.authenticated import LoginView, LogoutView
     print("✓ LoginView y LogoutView importados correctamente")
     
-    from Controllers.Auth.register_user import RegisterView
+    from views.Auth.register_user import RegisterView
     print("✓ RegisterView importado correctamente")
     
-    from Controllers.Auth.change_password import ChangePasswordView, ValidatePasswordView
+    from views.Auth.change_password import ChangePasswordView, ValidatePasswordView
     print("✓ ChangePasswordView y ValidatePasswordView importados correctamente")
     
-    from Controllers.Auth.get_role import GetRoleView
+    from views.Auth.get_role import GetRoleView
     print("✓ GetRoleView importado correctamente")
     
-    from Controllers.Auth.reset_password import VerifyEmailView
+    from views.Auth.reset_password import VerifyEmailView
     print("✓ VerifyEmailView importado correctamente")
     
-    from Controllers.Auth.verification import VerifyCodeView
+    from views.Auth.verification import VerifyCodeView
     print("✓ VerifyCodeView importado correctamente")
     
     # Importar servicios
-    from Controllers.services.first_login_service import verify_first_login
+    from views.services.first_login_service import verify_first_login
     print("✓ verify_first_login importado correctamente")
     
-    from Controllers.services.change_password_service import change_user_password
+    from views.services.change_password_service import change_user_password
     print("✓ change_user_password importado correctamente")
     
-    from Controllers.services.get_role_service import get_user_role_and_permissions
+    from views.services.get_role_service import get_user_role_and_permissions
     print("✓ get_user_role_and_permissions importado correctamente")
     
-    from Controllers.services.reset_password_service import verify_email
+    from views.services.reset_password_service import verify_email
     print("✓ verify_email importado correctamente")
     
-    from Controllers.services.verification_service import verify_code
+    from views.services.verification_service import verify_code
     print("✓ verify_code importado correctamente")
     
     # Importar modelos
-    from Controllers.models import UserVerificationToken
+    from views.models import UserVerificationToken
     print("✓ UserVerificationToken importado correctamente")
     
     print("\n🎉 ¡Todas las importaciones funcionan correctamente!")

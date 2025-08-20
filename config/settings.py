@@ -45,7 +45,7 @@ INSTALLED_APPS = [
     'guardian',
     
     # Local apps
-    '01_architect.apps.ArchitectConfig',
+    'architect.apps.ArchitectConfig',
 ]
 
 MIDDLEWARE = [
@@ -59,7 +59,7 @@ MIDDLEWARE = [
 ]
 
 MIDDLEWARE += [
-    '01_architect.middleware.optional_auth.OptionalAuthenticate',
+    'architect.middleware.optional_auth.OptionalAuthenticate',
 ]
 
 ROOT_URLCONF = 'config.urls'
@@ -136,7 +136,7 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Custom User Model
-AUTH_USER_MODEL = '01_architect.User'
+AUTH_USER_MODEL = 'architect.User'
 
 # Django Guardian Configuration
 AUTHENTICATION_BACKENDS = (

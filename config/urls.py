@@ -24,5 +24,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
 
     # Rutas del módulo 01_architect
-    path('api/architect/', include('01_architect.urls')),
+    path('api/architect/', include('architect.urls')),
 ]

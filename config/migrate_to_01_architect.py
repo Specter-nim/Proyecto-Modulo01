@@ -39,7 +39,8 @@ def backup_old_apps():
         "permissions",
         "roles",
         "services",
-        "Controllers"
+        #"Controllers"
+        "views"
     ]
     
     for app in old_apps:
@@ -78,7 +79,7 @@ def run_migrations():
     try:
         # Crear migraciones
         result = subprocess.run([
-            sys.executable, "manage.py", "makemigrations", "01_architect"
+            sys.executable, "manage.py", "makemigrations", "architect"
         ], capture_output=True, text=True, cwd=".")
         
         if result.returncode == 0:
